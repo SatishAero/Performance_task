@@ -9,14 +9,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch:'staging',url:'https://github.com/SatishAero/Performance_task.git'
+                git branch:'production',url:'https://github.com/SatishAero/Performance_task.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    def branchName = "staging"
+                    def branchName = "production"
                     def imageName = "satishvarma123/performance:${branchName}"
                     
                     docker.build(imageName, "-f Dockerfile .")
@@ -27,11 +27,11 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    def branchName = "staging"
+                    def branchName = "production"
                     def containerName = "performance-${branchName}"
                     def imageName = "satishvarma123/performance:${branchName}"
                      bat "docker rm -f ${containerName} || true"
-                    bat "docker run -d -p 8072:80 --name ${containerName} ${imageName}"
+                    bat "docker run -d -p 8073:80 --name ${containerName} ${imageName}"
                 }
             }
         }
