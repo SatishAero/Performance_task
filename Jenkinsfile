@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url:'https://github.com/SatishAero/multi_branch.git'
+                git url:'https://github.com/SatishAero/Performance_task.git'
             }
         }
 
@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     def branchName = env.BRANCH_NAME
-                    def imageName = "satishvarma123/yourapp:${branchName}"
+                    def imageName = "satishvarma123/performance:${branchName}"
                     
                     docker.build(imageName, "-f Dockerfile .")
                 }
@@ -28,8 +28,8 @@ pipeline {
             steps {
                 script {
                     def branchName = env.BRANCH_NAME
-                    def containerName = "yourapp-${branchName}"
-                    def imageName = "satishvarma123/yourapp:${branchName}"
+                    def containerName = "performance-${branchName}"
+                    def imageName = "satishvarma123/performance:${branchName}"
                      bat "docker rm -f ${containerName} || true"
                     bat "docker run -d --name ${containerName} ${imageName}"
                 }
