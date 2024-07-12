@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url:'https://github.com/SatishAero/Performance_task.git'
+                git branch:'dev',url:'https://github.com/SatishAero/Performance_task.git'
             }
         }
 
@@ -31,7 +31,7 @@ pipeline {
                     def containerName = "performance-${branchName}"
                     def imageName = "satishvarma123/performance:${branchName}"
                      bat "docker rm -f ${containerName} || true"
-                    bat "docker run -d -p 8070:80 --name ${containerName} ${imageName}"
+                    bat "docker run -d -p 8071:80 --name ${containerName} ${imageName}"
                 }
             }
         }
