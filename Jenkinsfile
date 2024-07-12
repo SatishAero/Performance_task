@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def branchName = env.BRANCH_NAME
+                    def branchName = "dev"
                     def imageName = "satishvarma123/performance:${branchName}"
                     
                     docker.build(imageName, "-f Dockerfile .")
@@ -27,7 +27,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    def branchName = env.BRANCH_NAME
+                    def branchName = "dev"
                     def containerName = "performance-${branchName}"
                     def imageName = "satishvarma123/performance:${branchName}"
                      bat "docker rm -f ${containerName} || true"
